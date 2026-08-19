@@ -1,0 +1,195 @@
+/* Original technical contour graphic for the homepage cover. */
+.hero-cover {
+  background: radial-gradient(ellipse at 50% 38%, #ff3e28 0%, #e30b14 39%, #870008 76%, #350003 100%);
+  box-shadow: 0 0 38px rgba(255, 33, 20, .56);
+  animation: cover-phosphor 5s ease-in-out infinite alternate;
+}
+
+.hero-cover {
+  animation: none;
+}
+
+.hero-cover::before,
+.hero-cover::after,
+.hero-cover strong,
+.hero-cover > span {
+  display: none;
+}
+
+.cover-wireframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 5px rgba(255, 125, 108, .22));
+}
+
+.cover-wireframe:not(.cover-wireframe--tunnel) {
+  display: none;
+}
+
+.cover-wireframe,
+.hero-cover::before,
+.hero-cover::after {
+  display: none;
+}
+
+.cover-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 4px rgba(156, 202, 255, .62));
+}
+
+/* A brief startup zoom: visual, not a blocking loading screen. */
+body.intro-active {
+  overflow-x: hidden;
+}
+
+html:has(body.intro-active) {
+  overflow-x: hidden;
+}
+
+.intro-active .hero-copy {
+  animation: startup-reveal .46s ease-out both;
+}
+
+.intro-active .hero-cover {
+  z-index: 8;
+  animation: cover-startup .46s cubic-bezier(.2, .72, .16, 1) both;
+  will-change: transform;
+}
+
+@keyframes cover-startup {
+  from { transform: scale(7); filter: brightness(1.13) saturate(1.08); }
+  to { transform: scale(1); filter: brightness(1) saturate(1); }
+}
+
+@keyframes startup-reveal {
+  0%, 28% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.cover-wireframe g {
+  fill: none;
+  stroke: rgba(32, 0, 3, .82);
+  stroke-width: 1.05;
+  vector-effect: non-scaling-stroke;
+}
+
+
+.cover-wireframe .cover-frame {
+  fill: none;
+  stroke: rgba(255, 230, 224, .7);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.cover-wireframe .cover-core {
+  fill: none;
+  stroke: rgba(255, 232, 225, .88);
+  stroke-width: 1.2;
+}
+
+.cover-wireframe .cover-window {
+  fill: rgba(24, 0, 3, .82);
+  stroke: rgba(255, 228, 221, .78);
+}
+
+.cover-wireframe .cover-room,
+.cover-wireframe .cover-floor-flow {
+  stroke: rgba(38, 0, 4, .93);
+}
+
+.cover-wireframe .tunnel-window {
+  fill: #180003;
+  stroke: rgba(255, 231, 222, .88);
+}
+
+.cover-wireframe .tunnel-wire,
+.cover-wireframe .tunnel-floor-flow {
+  stroke: rgba(255, 236, 228, .82);
+  stroke-width: .85;
+}
+
+.cover-wireframe .tunnel-floor-flow {
+  stroke: rgba(255, 249, 245, .94);
+}
+
+.hero-cover::before {
+  display: block;
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  clip-path: inset(5% 6%);
+  background: repeating-linear-gradient(0deg, rgba(255, 238, 233, .12) 0 1px, transparent 1px 6px);
+  mix-blend-mode: screen;
+  opacity: .34;
+  animation: scanline-roll 6s linear infinite;
+}
+
+.hero-cover::after {
+  display: block;
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: 23% -16% -10%;
+  pointer-events: none;
+  clip-path: inset(5% 6%);
+  background:
+    radial-gradient(ellipse at 17% 54%, rgba(255, 239, 222, .7) 0 7%, rgba(255, 116, 91, .24) 19%, transparent 40%),
+    radial-gradient(ellipse at 87% 51%, rgba(255, 226, 212, .66) 0 8%, rgba(255, 82, 67, .25) 20%, transparent 42%),
+    linear-gradient(90deg, transparent 22%, rgba(255, 223, 211, .16) 50%, transparent 78%);
+  filter: blur(9px);
+  mix-blend-mode: screen;
+  opacity: .76;
+  animation: haze-shift 7s ease-in-out infinite alternate;
+}
+
+.cover-wireframe {
+  z-index: 2;
+}
+
+
+@keyframes cover-phosphor {
+  from { filter: saturate(.94) brightness(.96); box-shadow: 0 0 20px rgba(215, 21, 13, .32); }
+  to { filter: saturate(1.08) brightness(1.07); box-shadow: 0 0 38px rgba(255, 49, 35, .6); }
+}
+
+@keyframes scanline-roll {
+  from { background-position: 0 0; }
+  to { background-position: 0 36px; }
+}
+
+@keyframes haze-shift {
+  from { transform: translate3d(-3%, 2%, 0) scale(.98); opacity: .54; }
+  to { transform: translate3d(3%, -2%, 0) scale(1.06); opacity: .86; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cover,
+  .hero-cover::before,
+  .hero-cover::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 699px) {
+  .hero-cover {
+    border-radius: 0 !important;
+    clip-path: inset(0);
+  }
+}
+
+/* The canvas owns the graphic; remove the older SVG and haze layers entirely. */
+.cover-wireframe,
+.hero-cover::before,
+.hero-cover::after {
+  display: none !important;
+}

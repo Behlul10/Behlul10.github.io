@@ -1,0 +1,40 @@
+/* One quiet red structural axis. The decorative symbols are intentionally removed. */
+.about-signal {
+  width: 2px;
+  background: var(--about-red);
+  opacity: .82;
+  box-shadow: none;
+}
+
+.about-signal::before,
+.about-signal::after,
+.about-signal i,
+.about-signal b,
+.about-signal span {
+  display: none;
+}
+
+.about-signal { left: 50%; }
+.about-signal { z-index: 2; }
+
+.about-intro,
+.about-education { z-index: 3; }
+
+.about-layout h1 {
+  position: relative;
+  z-index: 3;
+  white-space: nowrap;
+  font-size: clamp(2.8rem, 11.5vw, 10rem);
+}
+
+.about-layout h1 em {
+  display: inline;
+  margin-left: 0;
+}
+
+@media (min-width: 700px) {
+  .about-education {
+    width: min(42%, 400px);
+    margin-top: 6rem;
+  }
+}
