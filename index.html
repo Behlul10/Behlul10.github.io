@@ -136,14 +136,11 @@
   </main>
   <footer class="bottom-nav"><a href="index.html">Home</a><a href="about-me.html">About</a><a href="projects.html">Projects</a></footer>
   <script>
-    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
     const introDuration = 460;
-    if (!motionPreference.matches) {
-      document.body.classList.add('intro-active');
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        window.setTimeout(() => document.body.classList.remove('intro-active'), introDuration);
-      }));
-    }
+    document.body.classList.add('intro-active');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      window.setTimeout(() => document.body.classList.remove('intro-active'), introDuration);
+    }));
     const canvas = document.querySelector('.cover-canvas');
     const context = canvas.getContext('2d');
     let animationFrame;
@@ -387,20 +384,18 @@
         drawCover(time);
         lastRender = time;
       }
-      if (!motionPreference.matches && coverVisible) animationFrame = requestAnimationFrame(animateCover);
+      if (coverVisible) animationFrame = requestAnimationFrame(animateCover);
     };
 
     const updateCoverMotion = () => {
       cancelAnimationFrame(animationFrame);
-      if (motionPreference.matches) drawCover(0);
-      else if (coverVisible) {
+      if (coverVisible) {
         lastRender = 0;
         animationFrame = requestAnimationFrame(animateCover);
       }
     };
 
     window.addEventListener('resize', updateCoverMotion);
-    motionPreference.addEventListener('change', updateCoverMotion);
     new IntersectionObserver(([entry]) => {
       coverVisible = entry.isIntersecting;
       updateCoverMotion();
