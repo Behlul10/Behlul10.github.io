@@ -48,7 +48,8 @@ h2 { margin:.1rem 0 1.4rem; font-family:var(--serif); font-size:clamp(2rem,7vw,3
 .project-header { width:min(100%,860px); min-width:0; min-height:57vh; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr); align-content:center; justify-items:start; padding:4rem 0; text-align:left; }
 .project-header .hero-title { width:100%; max-width:100%; transform-origin:left center; }
 .project-header .episode { width:100%; }
-.project-summary { width:min(100%,32rem); max-width:32rem; margin:2.6rem 0 .45rem auto; font-family:var(--supporting); font-size:clamp(.9rem,2vw,1.05rem); font-weight:700; letter-spacing:.045em; line-height:1.35; overflow-wrap:anywhere; text-align:right; text-transform:uppercase; text-shadow:0 0 4px rgba(255,255,255,.65); }
+.project-summary { position:relative; width:min(100%,32rem); max-width:32rem; margin:2.6rem 0 .45rem auto; font-family:var(--supporting); font-size:clamp(.9rem,2vw,1.05rem); font-weight:700; letter-spacing:.075em; line-height:1.35; overflow-wrap:anywhere; text-align:right; text-transform:uppercase; text-shadow:0 0 1px #fff,0 0 2px #fff,0 0 5px #fff,0 0 10px rgba(255,255,255,.8),1px 0 1px #7ddcff,-1px 0 1px #ff7676; }
+.project-summary span { display:block; transform:scale(.78,1.13); transform-origin:right center; }
 .project-grid { display:grid; gap:clamp(2.8rem,7vw,5.5rem); padding:1rem 0 5rem; }
 .project-card { position:relative; display:grid; min-width:0; border:1px solid #fff; background:rgba(0,0,0,.91); box-shadow:7px 7px 0 rgba(214,43,43,.72); }
 .project-card::after { content:''; position:absolute; z-index:2; right:-1px; bottom:-1px; width:34px; height:34px; border-right:1px solid #fff; border-bottom:1px solid #fff; pointer-events:none; }
