@@ -35,6 +35,14 @@
       mix-blend-mode: screen;
     }
 
+    /* Keep the gravity-well projection wide on phones. The card becomes taller
+       there, so crop the sides instead of vertically squeezing the wireframe. */
+    @media (max-width: 699px) {
+      .about.section .sub-container::after {
+        background-size: 270% 100%;
+      }
+    }
+
     .about.section .sub-container > * {
       position: relative; z-index: 5;
     }

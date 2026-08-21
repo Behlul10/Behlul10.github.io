@@ -10,32 +10,6 @@
   <link rel="stylesheet" href="about.css?v=110">
   <style>
     /* ============================================================ */
-    /* WINNING DESIGN INTEGRATION:                                 */
-    /* Shape 01 Spacetime Gravity Well (Liquid Chrome & Space Stars)*/
-    /* Opacity: 26% | Button: Liquid Silver Chrome with 55% Grain  */
-    /* ============================================================ */
-
-    body.about-page {
-      background-color: #040404;
-      color: #f8f8f8;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* COMBINED BACKGROUND LAYER: SPACE STARS + SHAPE 01 GRAVITY WELL AT 26% OPACITY */
-    .about-bg-container {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      opacity: 0.26; /* EXACT 26% WINNING OPACITY */
-      background: #040404 url('assets/starfield.svg') center / cover no-repeat;
-    }
-
-    .about-bg-container::before {
-      content: ''; position: absolute; inset: 0;
-      background: url('assets/wireframe-3d-well-chrome.svg?v=1') center / 100% 100% no-repeat;
-      mix-blend-mode: screen;
-    }
-
-    /* ============================================================ */
     /* WINNING LIQUID SILVER CHROME BUTTON WITH 55% GRAIN           */
     /* ============================================================ */
     .custom-btn {
@@ -122,9 +96,6 @@
   </style>
 </head>
 <body class="about-page">
-  <!-- WINNING 26% OPACITY COMBINED BACKGROUND: SPACE STARS + SHAPE 01 GRAVITY WELL -->
-  <div class="about-bg-container"></div>
-
   <a class="skip-link" href="#main">Skip to content</a>
   
   <main id="main" class="about-layout">
@@ -141,14 +112,6 @@
       <p>I study Emerging Media Technology at the New York City College of Technology, with a focus on computation and web development. My work moves between game development, design, and physical computing.</p>
       <p>I enjoy the moment when an idea stops being an idea and starts responding to someone.</p>
       
-      <div style="margin-top: 1.8rem;">
-        <a class="custom-btn" href="projects.html">
-          <div class="btn-liquid-light-pool"></div>
-          <div class="btn-grain-layer"></div>
-          <div class="btn-shimmer-sweep"></div>
-          <span class="btn-text">View Projects →</span>
-        </a>
-      </div>
     </section>
 
     <section class="about-education">

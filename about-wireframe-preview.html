@@ -300,6 +300,14 @@
     .wireframe-card__copy p { max-width:38rem; margin:0; color:#fff; font:clamp(.9rem,1.6vw,1.08rem)/1.7 var(--reading); text-shadow: 0 1px 3px rgba(0,0,0,0.9); }
     .wireframe-card__copy .nav-btn-container { margin-top: 1.5rem; }
 
+    @media (max-width:699px) {
+      /* Preserve the wide desktop gravity-well projection; crop its sides on a phone instead of squeezing it into the portrait card. */
+      .card-well-chrome .card-bg-wireframe,
+      .card-well-white .card-bg-wireframe,
+      .card-well-nostars .card-bg-wireframe {
+        background-size:270% 100%;
+      }
+    }
     @media (min-width:700px) { .wireframe-card__copy { padding:2.2rem; } }
   </style>
 </head>
