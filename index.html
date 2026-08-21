@@ -6,6 +6,7 @@
   <meta name="description" content="Behlul Vardal — Emerging Media Technology student.">
   <title>Behlul Vardal Portfolio</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
+  <link rel="preload" as="image" href="assets/chrome-buttons.webp" type="image/webp">
   <link rel="stylesheet" href="style.css?v=28">
   <link rel="stylesheet" href="graphic.css">
   <style>
@@ -303,7 +304,7 @@
     let animationFrame;
     let coverVisible = true;
     let lastRender = 0;
-    const frameInterval = 1000 / 30;
+    const frameInterval = 1000 / 20;
 
     const line = (x1, y1, x2, y2) => {
       context.lineCap = 'round';
@@ -436,7 +437,7 @@
       const farY = frameY + frameHeight * .22;
       const farHeight = frameHeight * .40;
       const farBottom = farY + farHeight;
-      const segments = 12;
+      const segments = 10;
 
       context.save();
       context.beginPath();
@@ -463,8 +464,8 @@
       }
 
       const phase = (time / 13000) % 1;
-      const depthBands = Array.from({ length: 24 }, (_, index) => {
-        const point = (index / 24 + phase) % 1;
+      const depthBands = Array.from({ length: 18 }, (_, index) => {
+        const point = (index / 18 + phase) % 1;
         return { depth: Math.pow(point, 1.55), alpha: Math.min(1, point * 9) };
       });
 
@@ -541,18 +542,19 @@
         drawCover(time);
         lastRender = time;
       }
-      if (coverVisible) animationFrame = requestAnimationFrame(animateCover);
+      if (coverVisible && !document.hidden) animationFrame = requestAnimationFrame(animateCover);
     };
 
     const updateCoverMotion = () => {
       cancelAnimationFrame(animationFrame);
-      if (coverVisible) {
+      if (coverVisible && !document.hidden) {
         lastRender = 0;
         animationFrame = requestAnimationFrame(animateCover);
       }
     };
 
     window.addEventListener('resize', updateCoverMotion);
+    document.addEventListener('visibilitychange', updateCoverMotion);
     new IntersectionObserver(([entry]) => {
       coverVisible = entry.isIntersecting;
       updateCoverMotion();
