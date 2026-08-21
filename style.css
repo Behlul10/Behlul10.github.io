@@ -1,7 +1,10 @@
 @font-face { font-family:'Century Schoolbook'; src:url('assets/fonts/C059-Roman.otf') format('opentype'); font-weight:400; font-style:normal; font-display:swap; }
 @font-face { font-family:'Century Schoolbook'; src:url('assets/fonts/C059-Bold.otf') format('opentype'); font-weight:700; font-style:normal; font-display:swap; }
 @font-face { font-family:'Century Expanded'; src:url('assets/fonts/century-expanded-regular-opentype-1_ufonts.com.woff2') format('woff2'); font-weight:400 800; font-style:normal; font-display:swap; }
-@font-face { font-family:'Matisse Pro EB'; src:url('assets/fonts/fot-matisse-pro-eb-opentype_ufonts.com.woff2') format('woff2'); font-weight:400 800; font-style:normal; font-display:swap; }
+/* Matisse is a large display face. `optional` preserves it for normal/cached
+   visits, while allowing a fast local serif fallback instead of tying up a
+   cold navigation on a slow connection. */
+@font-face { font-family:'Matisse Pro EB'; src:url('assets/fonts/matisse-pro-eb-latin.woff2') format('woff2'); font-weight:400 800; font-style:normal; font-display:swap; }
 :root { --black:#050505; --white:#f8f8f8; --red:#d62b2b; --line:rgba(255,255,255,.11); --reading:'Times New Roman',Times,serif; --display:'Century Expanded',Century,serif; --supporting:'Matisse Pro EB',serif; --subtitle:'Matisse Pro EB',serif; --controls:'Century Schoolbook','New Century Schoolbook',Century,serif; --sans:var(--controls); }
 * { box-sizing:border-box; }
 html { scroll-behavior:auto; }
@@ -78,10 +81,12 @@ h2 { margin:.1rem 0 1.4rem; font-family:var(--supporting); font-size:clamp(2rem,
 .featured-projects__more:hover::after,.featured-projects__more:focus-visible::after { animation:featured-crt-glare .62s ease-out both; }
 @media (min-width:700px) { .featured-projects__grid { grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr); gap:1rem; }.featured-project--vision { grid-column:1; grid-row:1; }.featured-project--quant { grid-column:2; grid-row:1; }.featured-project--rainy { grid-column:1 / -1; grid-row:2; min-height:20rem; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); }.featured-project--rainy .featured-project__scene { min-height:100%; border-bottom:0; border-right:1px solid #111; }.featured-project--rainy .featured-project__copy { min-height:100%; }.featured-project--vision,.featured-project--quant { min-height:29rem; } }
 .nav-btn,.bottom-nav a { display:inline-block; border:1px solid #fff; background:#0d0d0d; color:#fff; padding:.58rem .9rem; font-family:var(--controls); text-decoration:none; font-size:.76rem; font-weight:bold; }.nav-btn { margin-top:.5rem; }.nav-btn:hover,.bottom-nav a:hover { background:#fff; color:#000; box-shadow:0 0 10px #fff; }
-.contact-rule { width:min(100%,34rem); height:4px; margin:0 0 1.5rem; border-top:1px solid rgba(255,255,255,.9); border-bottom:1px solid rgba(73,91,113,.9); background:#aabbd0 url('assets/chrome-buttons.webp') center 48% / cover no-repeat; box-shadow:0 0 5px rgba(198,236,255,.62),0 0 12px rgba(121,195,233,.24); }
+.contact-rule { width:min(100%,34rem); height:4px; margin:0 0 1.5rem; border-top:1px solid rgba(255,255,255,.9); border-bottom:1px solid rgba(73,91,113,.9); background:#aabbd0 url('assets/chrome_3-button.webp') center 48% / cover no-repeat; box-shadow:0 0 5px rgba(198,236,255,.62),0 0 12px rgba(121,195,233,.24); }
 .contact { display:flex; flex-wrap:wrap; gap:.75rem; }
 .contact a { position:relative; isolation:isolate; display:inline-grid; min-width:5.9rem; overflow:hidden; border:1px solid rgba(238,250,255,.92); padding:.62rem 1rem; background-color:#172033; background-image:var(--chrome-image); background-position:center; background-size:cover; box-shadow:0 0 0 1px rgba(151,222,255,.24),0 3px 10px rgba(0,0,0,.58),0 0 8px rgba(163,232,255,.3); color:#fff; font-family:var(--controls); font-size:.76rem; font-weight:700; letter-spacing:.06em; line-height:1.1; text-align:center; text-decoration:none; text-shadow:0 1px 2px #02040a,0 0 5px rgba(0,0,0,.96); transition:transform .18s ease,box-shadow .18s ease; }
-.contact a:nth-child(1),.contact a:nth-child(2),.contact a:nth-child(3) { --chrome-image:url('assets/chrome-buttons.webp'); background-position:54% 50%; }
+.contact a:nth-child(1) { --chrome-image:url('assets/chrome_1-button.webp'); background-position:54% 50%; }
+.contact a:nth-child(2) { --chrome-image:url('assets/chrome_4-button.webp'); background-position:50% 50%; }
+.contact a:nth-child(3) { --chrome-image:url('assets/chrome_3-button.webp'); background-position:50% 58%; }
 .contact a > span { position:relative; z-index:1; justify-self:center; }
 .contact a > span::after { content:''; position:absolute; z-index:2; top:-.56rem; left:calc(100% + .12rem); width:1.15rem; height:1.15rem; background:#fff; clip-path:polygon(50% 0,57% 40%,100% 50%,57% 60%,50% 100%,43% 60%,0 50%,43% 40%); filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 6px rgba(255,255,255,.95)); opacity:0; pointer-events:none; transform:scale(.1) rotate(45deg); }
 .contact a::before { content:''; position:absolute; z-index:0; inset:-35% -18%; background:radial-gradient(ellipse at center,rgba(255,255,255,.94) 0 4%,rgba(205,244,255,.55) 12%,rgba(179,223,255,.12) 25%,transparent 46%); mix-blend-mode:screen; opacity:0; pointer-events:none; transform:translateX(-70%); }
