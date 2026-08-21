@@ -1,3 +1,167 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="About Behlul Vardal."><title>About Me — Behlul Vardal</title><link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2"><link rel="stylesheet" href="style.css?v=4"><link rel="stylesheet" href="about.css"></head>
-<body class="about-page"><a class="skip-link" href="#main">Skip to content</a><main id="main" class="about-layout"><p class="about-kicker">PERSONAL PAGE: 02</p><div class="about-signal" aria-hidden="true"><i></i><b></b><span></span></div><h1>ABOUT <em>ME.</em></h1><section class="about-intro"><p class="lead">I’m Behlul Vardal — a student and multidisciplinary maker based in New York City.</p><p>I study Emerging Media Technology at the New York City College of Technology, with a focus on computation and web development. My work moves between game development, design, and physical computing.</p><p>I enjoy the moment when an idea stops being an idea and starts responding to someone.</p></section><section class="about-education"><p class="about-kicker">EDUCATION</p><h2>THE CITY UNIVERSITY<br>OF NEW YORK</h2><p>New York City College of Technology<br>BT in Emerging Media Technology<br>Concentration in Computation<br>Minor in Physics</p></section></main><footer class="bottom-nav"><a href="index.html">Home</a><a href="about-me.html">About</a><a href="projects.html">Projects</a></footer></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="About Behlul Vardal — Student and Multidisciplinary Maker in NYC.">
+  <title>About Me — Behlul Vardal</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
+  <link rel="stylesheet" href="style.css?v=110">
+  <link rel="stylesheet" href="about.css?v=110">
+  <style>
+    /* ============================================================ */
+    /* WINNING DESIGN INTEGRATION:                                 */
+    /* Shape 01 Spacetime Gravity Well (Liquid Chrome & Space Stars)*/
+    /* Opacity: 26% | Button: Liquid Silver Chrome with 55% Grain  */
+    /* ============================================================ */
+
+    body.about-page {
+      background-color: #040404;
+      color: #f8f8f8;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* COMBINED BACKGROUND LAYER: SPACE STARS + SHAPE 01 GRAVITY WELL AT 26% OPACITY */
+    .about-bg-container {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      opacity: 0.26; /* EXACT 26% WINNING OPACITY */
+      background: #040404 url('assets/starfield.svg') center / cover no-repeat;
+    }
+
+    .about-bg-container::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('assets/wireframe-3d-well-chrome.svg?v=1') center / 100% 100% no-repeat;
+      mix-blend-mode: screen;
+    }
+
+    /* ============================================================ */
+    /* WINNING LIQUID SILVER CHROME BUTTON WITH 55% GRAIN           */
+    /* ============================================================ */
+    .custom-btn {
+      position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center;
+      padding: .9rem 2.2rem; font-family: var(--controls); font-size: .86rem; font-weight: 800;
+      letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border-radius: 3px;
+      cursor: pointer; transition: all .3s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden;
+      border: 1.5px solid #ffffff;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(241, 245, 249, 0.95) 25%, rgba(203, 213, 225, 0.9) 50%, rgba(226, 232, 240, 0.95) 75%, rgba(255, 255, 255, 1) 100%),
+        url('assets/liquid-chrome-texture.svg?v=110') center / cover no-repeat;
+      box-shadow:
+        inset 0 1.5px 3px rgba(255,255,255,1),
+        inset 0 -3px 6px rgba(148, 163, 184, 0.45),
+        0 0 16px rgba(255, 255, 255, 0.65),
+        0 0 32px rgba(226, 232, 240, 0.4);
+    }
+
+    .custom-btn::after {
+      content: '✦'; position: absolute; top: -7px; right: -7px; color: #ffffff; font-size: 16px; z-index: 6;
+      text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff; transition: transform .3s ease;
+    }
+
+    /* PROTECTED TEXT LAYER (STAYS CRISP & BOLD) */
+    .btn-text {
+      position: relative; z-index: 10; isolation: isolate; mix-blend-mode: normal;
+      color: #030712; font-weight: 900; letter-spacing: .14em;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.95);
+      transition: color .25s ease;
+    }
+
+    /* WHITE-HOT LIQUID LIGHT POOL (GLOWS ON HOVER) */
+    .btn-liquid-light-pool {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.7) 35%, transparent 75%),
+        radial-gradient(ellipse at 75% 80%, rgba(226, 232, 240, 0.9) 0%, rgba(148, 163, 184, 0.5) 45%, transparent 80%);
+      opacity: 0; transition: opacity .35s ease, transform .35s ease;
+      animation: gentleLiquidRipples 3.5s infinite alternate ease-in-out;
+    }
+
+    /* 55% 90S ANIME FILM GRAIN LAYER (HOVER ONLY) */
+    .btn-grain-layer {
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background-image: url('assets/anime-grain-texture.png?v=110'); background-size: 180px 180px;
+      mix-blend-mode: overlay; opacity: 0; transition: opacity .35s ease;
+    }
+
+    /* CONTINUOUS LIGHT SHIMMER SWEEP */
+    .btn-shimmer-sweep {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      background: linear-gradient(115deg, transparent 25%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.3) 55%, transparent 75%);
+      transform: translateX(-160%); transition: none;
+    }
+
+    .custom-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow:
+        inset 0 2.5px 5px rgba(255,255,255,1),
+        0 0 40px rgba(255, 255, 255, 1),
+        0 0 75px rgba(56, 189, 248, 0.9);
+    }
+
+    .custom-btn:hover .btn-liquid-light-pool { opacity: 1; transform: scale(1.1); }
+    .custom-btn:hover .btn-grain-layer { opacity: 0.55; } /* EXACT 55% GRAIN */
+    .custom-btn:hover .btn-shimmer-sweep { animation: continuousLiquidSweep 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+    .custom-btn:hover::after { animation: pulseSparkleSpin 1.6s infinite alternate ease-in-out; }
+
+    @keyframes gentleLiquidRipples {
+      0% { transform: scale(1) translate(0, 0); }
+      100% { transform: scale(1.08) translate(3px, -2px); }
+    }
+
+    @keyframes continuousLiquidSweep {
+      0% { transform: translateX(-160%); }
+      55% { transform: translateX(160%); }
+      100% { transform: translateX(160%); }
+    }
+
+    @keyframes pulseSparkleSpin {
+      0% { opacity: 0.7; transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 8px #ffffff); }
+      100% { opacity: 1; transform: scale(1.35) rotate(35deg); filter: drop-shadow(0 0 14px #ffffff) drop-shadow(0 0 28px #38bdf8); }
+    }
+  </style>
+</head>
+<body class="about-page">
+  <!-- WINNING 26% OPACITY COMBINED BACKGROUND: SPACE STARS + SHAPE 01 GRAVITY WELL -->
+  <div class="about-bg-container"></div>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+  
+  <main id="main" class="about-layout">
+    <p class="about-kicker">PERSONAL PAGE: 02</p>
+    
+    <div class="about-signal" aria-hidden="true">
+      <i></i><b></b><span></span>
+    </div>
+    
+    <h1>ABOUT <em>ME.</em></h1>
+    
+    <section class="about-intro">
+      <p class="lead">I’m Behlul Vardal — a student and multidisciplinary maker based in New York City.</p>
+      <p>I study Emerging Media Technology at the New York City College of Technology, with a focus on computation and web development. My work moves between game development, design, and physical computing.</p>
+      <p>I enjoy the moment when an idea stops being an idea and starts responding to someone.</p>
+      
+      <div style="margin-top: 1.8rem;">
+        <a class="custom-btn" href="projects.html">
+          <div class="btn-liquid-light-pool"></div>
+          <div class="btn-grain-layer"></div>
+          <div class="btn-shimmer-sweep"></div>
+          <span class="btn-text">View Projects →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="about-education">
+      <p class="about-kicker">EDUCATION</p>
+      <h2>THE CITY UNIVERSITY<br>OF NEW YORK</h2>
+      <p>New York City College of Technology<br>BT in Emerging Media Technology<br>Concentration in Computation<br>Minor in Physics</p>
+    </section>
+  </main>
+
+  <footer class="bottom-nav">
+    <a href="index.html">Home</a>
+    <a href="about-me.html">About</a>
+    <a href="projects.html">Projects</a>
+  </footer>
+</body>
+</html>

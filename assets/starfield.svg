@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180" preserveAspectRatio="none">
+  <defs>
+    <pattern id="star-dust-a" width="43" height="57" patternUnits="userSpaceOnUse" patternTransform="rotate(-7)">
+      <g fill="white">
+        <circle cx="2" cy="4" r=".2" opacity=".55"/><circle cx="8" cy="17" r=".34" opacity=".72"/><circle cx="14" cy="9" r=".16" opacity=".46"/><circle cx="20" cy="31" r=".28" opacity=".62"/><circle cx="27" cy="6" r=".18" opacity=".48"/><circle cx="34" cy="21" r=".38" opacity=".78"/><circle cx="41" cy="12" r=".17" opacity=".44"/><circle cx="6" cy="39" r=".27" opacity=".58"/><circle cx="12" cy="52" r=".16" opacity=".42"/><circle cx="19" cy="46" r=".33" opacity=".7"/><circle cx="25" cy="56" r=".2" opacity=".52"/><circle cx="31" cy="38" r=".17" opacity=".46"/><circle cx="38" cy="48" r=".3" opacity=".68"/><circle cx="41" cy="33" r=".16" opacity=".4"/><circle cx="4" cy="27" r=".18" opacity=".52"/><circle cx="23" cy="16" r=".2" opacity=".48"/>
+      </g>
+    </pattern>
+    <pattern id="star-dust-b" width="61" height="41" patternUnits="userSpaceOnUse" patternTransform="rotate(13)">
+      <g fill="white">
+        <circle cx="5" cy="8" r=".16" opacity=".42"/><circle cx="11" cy="24" r=".26" opacity=".64"/><circle cx="18" cy="4" r=".18" opacity=".52"/><circle cx="25" cy="31" r=".15" opacity=".4"/><circle cx="34" cy="13" r=".3" opacity=".7"/><circle cx="42" cy="36" r=".17" opacity=".48"/><circle cx="53" cy="7" r=".24" opacity=".62"/><circle cx="59" cy="27" r=".16" opacity=".44"/><circle cx="8" cy="38" r=".17" opacity=".46"/><circle cx="29" cy="20" r=".15" opacity=".42"/><circle cx="48" cy="20" r=".2" opacity=".54"/>
+      </g>
+    </pattern>
+    <pattern id="star-dust-c" width="43" height="57" patternUnits="userSpaceOnUse" patternTransform="translate(19 23) rotate(22)">
+      <g fill="white">
+        <circle cx="2" cy="4" r=".2" opacity=".55"/><circle cx="8" cy="17" r=".34" opacity=".72"/><circle cx="14" cy="9" r=".16" opacity=".46"/><circle cx="20" cy="31" r=".28" opacity=".62"/><circle cx="27" cy="6" r=".18" opacity=".48"/><circle cx="34" cy="21" r=".38" opacity=".78"/><circle cx="41" cy="12" r=".17" opacity=".44"/><circle cx="6" cy="39" r=".27" opacity=".58"/><circle cx="12" cy="52" r=".16" opacity=".42"/><circle cx="19" cy="46" r=".33" opacity=".7"/><circle cx="25" cy="56" r=".2" opacity=".52"/><circle cx="31" cy="38" r=".17" opacity=".46"/><circle cx="38" cy="48" r=".3" opacity=".68"/><circle cx="41" cy="33" r=".16" opacity=".4"/><circle cx="4" cy="27" r=".18" opacity=".52"/><circle cx="23" cy="16" r=".2" opacity=".48"/>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="300" height="180" fill="url(#star-dust-a)" opacity=".78"/>
+  <rect width="300" height="180" fill="url(#star-dust-b)" opacity=".64"/>
+  <rect width="300" height="180" fill="url(#star-dust-c)" opacity=".58"/>
+  <rect x="-75" y="-60" width="450" height="300" fill="url(#star-dust-b)" opacity=".5" transform="rotate(31 150 90)"/>
+  <g fill="white">
+    <circle cx="5" cy="8" r=".32" opacity=".45"/><circle cx="12" cy="25" r=".45" opacity=".7"/><circle cx="19" cy="58" r=".28" opacity=".5"/><circle cx="24" cy="101" r=".56" opacity=".8"/><circle cx="31" cy="142" r=".3" opacity=".4"/><circle cx="37" cy="14" r=".62" opacity=".9"/><circle cx="42" cy="39" r=".27" opacity=".5"/><circle cx="48" cy="73" r=".42" opacity=".72"/><circle cx="54" cy="118" r=".25" opacity=".46"/><circle cx="61" cy="159" r=".58" opacity=".78"/>
+    <circle cx="68" cy="5" r=".3" opacity=".55"/><circle cx="73" cy="34" r=".47" opacity=".8"/><circle cx="79" cy="87" r=".3" opacity=".52"/><circle cx="85" cy="130" r=".62" opacity=".9"/><circle cx="90" cy="168" r=".27" opacity=".5"/><circle cx="97" cy="18" r=".42" opacity=".76"/><circle cx="103" cy="54" r=".29" opacity=".5"/><circle cx="109" cy="97" r=".52" opacity=".84"/><circle cx="116" cy="145" r=".3" opacity=".55"/><circle cx="121" cy="72" r=".25" opacity=".42"/>
+    <circle cx="128" cy="9" r=".55" opacity=".82"/><circle cx="134" cy="41" r=".28" opacity=".48"/><circle cx="140" cy="65" r=".44" opacity=".72"/><circle cx="146" cy="113" r=".27" opacity=".48"/><circle cx="151" cy="155" r=".6" opacity=".88"/><circle cx="158" cy="26" r=".3" opacity=".52"/><circle cx="163" cy="84" r=".5" opacity=".78"/><circle cx="169" cy="137" r=".26" opacity=".45"/><circle cx="175" cy="50" r=".57" opacity=".86"/><circle cx="181" cy="104" r=".3" opacity=".55"/>
+    <circle cx="187" cy="16" r=".28" opacity=".46"/><circle cx="193" cy="70" r=".49" opacity=".8"/><circle cx="199" cy="123" r=".27" opacity=".5"/><circle cx="204" cy="165" r=".56" opacity=".84"/><circle cx="211" cy="38" r=".3" opacity=".56"/><circle cx="217" cy="94" r=".45" opacity=".72"/><circle cx="223" cy="147" r=".28" opacity=".48"/><circle cx="229" cy="7" r=".61" opacity=".9"/><circle cx="235" cy="61" r=".26" opacity=".45"/><circle cx="241" cy="112" r=".5" opacity=".78"/>
+    <circle cx="247" cy="154" r=".3" opacity=".54"/><circle cx="253" cy="29" r=".48" opacity=".76"/><circle cx="259" cy="81" r=".27" opacity=".45"/><circle cx="265" cy="135" r=".58" opacity=".86"/><circle cx="270" cy="4" r=".29" opacity=".5"/><circle cx="276" cy="47" r=".44" opacity=".72"/><circle cx="281" cy="99" r=".3" opacity=".52"/><circle cx="287" cy="143" r=".55" opacity=".84"/><circle cx="293" cy="22" r=".27" opacity=".46"/><circle cx="298" cy="74" r=".47" opacity=".76"/>
+    <circle cx="8" cy="166" r=".72" opacity=".94"/><circle cx="57" cy="91" r=".68" opacity=".92"/><circle cx="111" cy="29" r=".74" opacity=".95"/><circle cx="156" cy="176" r=".65" opacity=".9"/><circle cx="202" cy="77" r=".7" opacity=".95"/><circle cx="245" cy="119" r=".68" opacity=".92"/><circle cx="286" cy="162" r=".76" opacity=".95"/>
+  </g>
+</svg>

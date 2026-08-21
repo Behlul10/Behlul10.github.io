@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 842 594" preserveAspectRatio="none" shape-rendering="geometricPrecision">
+  <g fill="none" stroke="#e63836" stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+    <!-- latitude: concentric elliptical rings collapse into the well -->
+    <ellipse cx="421" cy="498" rx="39" ry="12"/>
+    <ellipse cx="421" cy="490" rx="65" ry="20"/>
+    <ellipse cx="421" cy="478" rx="105" ry="32"/>
+    <ellipse cx="421" cy="462" rx="160" ry="48"/>
+    <ellipse cx="421" cy="442" rx="225" ry="68"/>
+    <ellipse cx="421" cy="418" rx="300" ry="92"/>
+    <ellipse cx="421" cy="390" rx="390" ry="120"/>
+    <ellipse cx="421" cy="355" rx="505" ry="155"/>
+    <ellipse cx="421" cy="315" rx="640" ry="195"/>
+    <ellipse cx="421" cy="270" rx="790" ry="240"/>
+    <ellipse cx="421" cy="220" rx="955" ry="290"/>
+    <!-- longitude: smooth curves flowing into the centre of the well -->
+    <path d="M421 -18 C421 220 421 410 421 510"/>
+    <path d="M315 -10 C336 218 390 435 403 507"/>
+    <path d="M210 8 C266 235 364 448 391 508"/>
+    <path d="M112 48 C234 267 347 465 380 509"/>
+    <path d="M22 108 C183 306 330 479 369 509"/>
+    <path d="M-38 186 C127 342 315 489 361 509"/>
+    <g transform="translate(842 0) scale(-1 1)">
+      <path d="M315 -10 C336 218 390 435 403 507"/>
+      <path d="M210 8 C266 235 364 448 391 508"/>
+      <path d="M112 48 C234 267 347 465 380 509"/>
+      <path d="M22 108 C183 306 330 479 369 509"/>
+      <path d="M-38 186 C127 342 315 489 361 509"/>
+    </g>
+  </g>
+</svg>

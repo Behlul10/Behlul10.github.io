@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Me — Interactive Wireframe & Stars Opacity Slider Showcase</title>
+  <link rel="stylesheet" href="style.css?v=110">
+  <style>
+    :root {
+      --grain-opacity: 0.55;
+      --wireframe-opacity: 0.15; /* Default 15% combined stars + wireframe opacity */
+    }
+
+    .wireframe-preview { width:min(94%,1100px); margin:0 auto; padding:3rem 0 6rem; }
+    .wireframe-header { margin-bottom: 2rem; position:relative; border-left: 3px solid #ffffff; padding-left: 1.2rem; }
+    .wireframe-header::before { content:'NERV SYSTEM // COMBINED STARS & WIREFRAME OPACITY SHOWCASE'; display:block; color:#e2e8f0; font-family:var(--controls); font-size:.65rem; font-weight:700; letter-spacing:.15em; margin-bottom:.4rem; }
+    .wireframe-preview h1 { margin:0 0 .6rem; font-family:var(--display); font-size:clamp(2.2rem,7vw,4.5rem); line-height:.85; letter-spacing:-.03em; }
+    .wireframe-preview p { max-width:46rem; margin:0 0 1.5rem; color:#d1d5db; font-size:1.02rem; }
+
+    /* ============================================================ */
+    /* INTERACTIVE CONTROLS CONTAINER                               */
+    /* ============================================================ */
+    .controls-panel {
+      display: flex; flex-direction: column; gap: 1.2rem;
+      margin-bottom: 2rem; padding: 1.4rem 1.8rem; background: #0f121a; border: 1.5px solid rgba(255,255,255,0.4);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+    
+    .control-group { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem; }
+    .control-group span { font-family: var(--controls); font-size: .8rem; font-weight: 800; color: #ffffff; letter-spacing: .12em; text-transform: uppercase; min-width: 250px; }
+
+    /* OPACITY SLIDER STYLING */
+    .slider-container { display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 280px; }
+    .custom-slider {
+      -webkit-appearance: none; appearance: none; width: 100%; height: 8px;
+      background: #1e2433; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; outline: none; cursor: pointer;
+    }
+    .custom-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 20px; height: 20px;
+      border-radius: 50%; background: #ffffff; border: 2px solid #38bdf8;
+      box-shadow: 0 0 10px #ffffff, 0 0 18px #38bdf8; cursor: pointer; transition: transform .15s ease;
+    }
+    .custom-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    .slider-val-tag {
+      font-family: var(--controls); font-size: .85rem; font-weight: 800; color: #38bdf8;
+      padding: .3rem .7rem; background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.4); border-radius: 3px; min-width: 90px; text-align: center;
+    }
+
+    .grain-btn {
+      background: #1a1e2b; border: 1px solid rgba(255,255,255,0.4); color: #e2e8f0;
+      padding: .45rem 1rem; font-family: var(--controls); font-size: .78rem; font-weight: 800;
+      letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: all .2s ease;
+    }
+    .grain-btn:hover, .grain-btn.active {
+      background: #ffffff; border-color: #ffffff; color: #050505; box-shadow: 0 0 16px rgba(255,255,255,0.8);
+    }
+
+    /* GLOBAL ANIME FILM GRAIN NOISE OVERLAY LAYER */
+    .grain-layer {
+      position: absolute; inset: 0; pointer-events: none; z-index: 4;
+      background-image: url('assets/anime-grain-texture.png?v=110');
+      background-size: 180px 180px; background-repeat: repeat;
+      mix-blend-mode: overlay; opacity: var(--grain-opacity);
+      transition: opacity .3s ease;
+    }
+
+    /* ============================================================ */
+    /* HOVER LIQUID LIGHT CHROME BUTTON SHOWCASE                    */
+    /* ============================================================ */
+    .button-showcase {
+      margin-bottom: 3.5rem; padding: 2.2rem; border: 1.5px solid rgba(255,255,255,0.4);
+      background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.18), transparent 75%), #050608;
+      position: relative; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.9);
+    }
+
+    .button-showcase h3 {
+      margin: 0 0 1.5rem; font-family: var(--controls); font-size: .88rem; font-weight: 700;
+      letter-spacing: .15em; text-transform: uppercase; color: #ffffff; display: flex; align-items: center; gap: .6rem; position: relative; z-index: 5;
+    }
+    .button-showcase h3::before { content: ''; display: inline-block; width: 8px; height: 8px; background: #ffffff; box-shadow: 0 0 10px #ffffff; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 1.4rem; align-items: center; position: relative; z-index: 5; }
+
+    /* --- BASE BUTTON STYLE --- */
+    .custom-btn {
+      position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center;
+      padding: .95rem 2.2rem; font-family: var(--controls); font-size: .86rem; font-weight: 800;
+      letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border-radius: 3px;
+      cursor: pointer; transition: all .3s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden;
+    }
+
+    /* PROTECTED BUTTON TEXT LAYER */
+    .btn-text {
+      position: relative; z-index: 10; isolation: isolate; mix-blend-mode: normal;
+      color: #030712; font-weight: 900; letter-spacing: .14em;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.95);
+      transition: color .25s ease;
+    }
+
+    /* LIQUID LIGHT POOL (REVEALS & STAYS ON ON HOVER) */
+    .btn-liquid-light-pool {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.7) 35%, transparent 75%),
+        radial-gradient(ellipse at 75% 80%, rgba(226, 232, 240, 0.9) 0%, rgba(148, 163, 184, 0.5) 45%, transparent 80%);
+      opacity: 0; transition: opacity .35s ease, transform .35s ease;
+      animation: gentleLiquidRipples 3.5s infinite alternate ease-in-out;
+    }
+
+    .custom-btn:hover .btn-liquid-light-pool {
+      opacity: 1; transform: scale(1.1);
+    }
+
+    @keyframes gentleLiquidRipples {
+      0% { transform: scale(1) translate(0, 0); }
+      100% { transform: scale(1.08) translate(3px, -2px); }
+    }
+
+    /* GRAIN APPEARS ON HOVER ONLY FOR BUTTONS */
+    .custom-btn .btn-grain-layer {
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background-image: url('assets/anime-grain-texture.png?v=110'); background-size: 180px 180px;
+      mix-blend-mode: overlay; opacity: 0; transition: opacity .35s ease;
+    }
+    .custom-btn:hover .btn-grain-layer {
+      opacity: var(--grain-opacity, 0.55);
+    }
+
+    /* CONTINUOUS SPECULAR LIGHT BEAM SWEEP ON HOVER */
+    .btn-shimmer-sweep {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      background: linear-gradient(115deg, transparent 25%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.3) 55%, transparent 75%);
+      transform: translateX(-160%); transition: none;
+    }
+    .custom-btn:hover .btn-shimmer-sweep {
+      animation: continuousLiquidSweep 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes continuousLiquidSweep {
+      0% { transform: translateX(-160%); }
+      55% { transform: translateX(160%); }
+      100% { transform: translateX(160%); }
+    }
+
+    /* 1. LIQUID MERCURY CHROME */
+    .btn--ultra-bright-chrome {
+      border: 1.5px solid #ffffff;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(241, 245, 249, 0.95) 25%, rgba(203, 213, 225, 0.9) 50%, rgba(226, 232, 240, 0.95) 75%, rgba(255, 255, 255, 1) 100%),
+        url('assets/liquid-chrome-texture.svg?v=110') center / cover no-repeat;
+      box-shadow:
+        inset 0 1.5px 3px rgba(255,255,255,1),
+        inset 0 -3px 6px rgba(148, 163, 184, 0.45),
+        0 0 16px rgba(255, 255, 255, 0.65),
+        0 0 32px rgba(226, 232, 240, 0.4);
+    }
+    .btn--ultra-bright-chrome::after {
+      content: '✦'; position: absolute; top: -7px; right: -7px; color: #ffffff; font-size: 16px; z-index: 6;
+      text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff; transition: transform .3s ease;
+    }
+    .btn--ultra-bright-chrome:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow:
+        inset 0 2.5px 5px rgba(255,255,255,1),
+        0 0 40px rgba(255, 255, 255, 1),
+        0 0 75px rgba(56, 189, 248, 0.9);
+    }
+    .btn--ultra-bright-chrome:hover::after {
+      animation: pulseSparkleSpin 1.6s infinite alternate ease-in-out;
+    }
+
+    /* 2. HIGH-GLOSS LIQUID PLATINUM PILL */
+    .btn--platinum-pill {
+      border: 1.5px solid #ffffff; border-radius: 50px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255, 235, 220, 0.75), transparent 45%),
+        linear-gradient(135deg, #ffffff 0%, #f8fafc 20%, #cbd5e1 50%, #e2e8f0 75%, #ffffff 100%);
+      box-shadow:
+        inset 0 2px 4px rgba(255,255,255,1),
+        inset 0 -3px 5px rgba(148, 163, 184, 0.4),
+        0 0 16px rgba(255, 255, 255, 0.6),
+        0 0 30px rgba(226, 232, 240, 0.35);
+    }
+    .btn--platinum-pill .btn-grain-layer { border-radius: 50px; }
+    .btn--platinum-pill::after {
+      content: '✦'; position: absolute; top: -6px; right: 14px; color: #ffffff; font-size: 15px; z-index: 6;
+      text-shadow: 0 0 10px #ffffff, 0 0 20px rgba(255, 235, 220, 1); transition: transform .3s ease;
+    }
+    .btn--platinum-pill:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow:
+        inset 0 2.5px 5px rgba(255,255,255,1),
+        0 0 40px rgba(255, 255, 255, 1),
+        0 0 75px rgba(226, 232, 240, 0.95);
+    }
+    .btn--platinum-pill:hover::after {
+      animation: pulseSparkleSpin 1.6s infinite alternate ease-in-out;
+    }
+
+    /* 3. LUMINOUS SPECULAR CHROME WAVE */
+    .btn--specular-wave {
+      border: 1.5px solid #ffffff;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(241,245,249,0.95) 30%, rgba(203,213,225,0.9) 60%, rgba(255,255,255,1) 100%),
+        url('assets/liquid-chrome-texture.svg?v=110') center / cover no-repeat;
+      box-shadow:
+        inset 0 2px 3px rgba(255,255,255,1),
+        inset 0 -3px 5px rgba(100, 116, 139, 0.4),
+        0 0 16px rgba(255, 255, 255, 0.6),
+        0 0 30px rgba(148, 163, 184, 0.35);
+    }
+    .btn--specular-wave::after {
+      content: '✦'; position: absolute; top: -6px; right: -6px; color: #ffffff; font-size: 15px; z-index: 6;
+      text-shadow: 0 0 8px #ffffff, 0 0 16px #38bdf8; transition: transform .3s ease;
+    }
+    .btn--specular-wave:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow:
+        inset 0 2.5px 5px rgba(255,255,255,1),
+        0 0 40px rgba(255, 255, 255, 1),
+        0 0 70px rgba(56, 189, 248, 0.85);
+    }
+    .btn--specular-wave:hover::after {
+      animation: pulseSparkleSpin 1.6s infinite alternate ease-in-out;
+    }
+
+    /* 4. LIQUID SILVER MIRROR GLASS */
+    .btn--mirror-glass {
+      border: 1.5px solid #ffffff;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(241, 245, 249, 0.9) 50%, rgba(226, 232, 240, 0.95) 100%);
+      box-shadow:
+        inset 0 2px 3px rgba(255,255,255,1),
+        0 0 18px rgba(255, 255, 255, 0.6),
+        0 0 35px rgba(226, 232, 240, 0.4);
+    }
+    .btn--mirror-glass:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow:
+        inset 0 2.5px 5px rgba(255,255,255,1),
+        0 0 45px rgba(255, 255, 255, 1),
+        0 0 80px rgba(255, 255, 255, 0.95);
+    }
+
+    @keyframes pulseSparkleSpin {
+      0% { opacity: 0.7; transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 8px #ffffff); }
+      100% { opacity: 1; transform: scale(1.35) rotate(35deg); filter: drop-shadow(0 0 14px #ffffff) drop-shadow(0 0 28px #38bdf8); }
+    }
+
+    /* Palette Filter Controls */
+    .filter-controls { display:flex; flex-wrap:wrap; gap:.65rem; margin-bottom:2.5rem; }
+    .filter-btn {
+      background: #0d0d0d; border: 1px solid rgba(255,255,255,0.18); color: #e2e8f0;
+      padding: .55rem 1.1rem; font-family: var(--controls); font-size: .78rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: all .2s ease;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: #ffffff; border-color: #ffffff; color: #050505; box-shadow: 0 0 12px rgba(255,255,255,0.5);
+    }
+
+    .wireframe-grid { display:grid; gap:2.2rem; }
+    .wireframe-card {
+      position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.15);
+      background:#040404; transition: border-color .3s ease, box-shadow .3s ease;
+    }
+
+    /* COMBINED BACKGROUND LAYER (STARS + WIREFRAME TOGETHER CONTROLLED BY SLIDER) */
+    .card-bg-layer {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      opacity: var(--wireframe-opacity, 0.15); /* DYNAMIC SLIDER CONTROLS BOTH STARS & WIREFRAME */
+      transition: opacity .15s ease;
+    }
+
+    /* SPACE STARS BACKGROUND LAYER */
+    .card-bg-stars {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background: url('assets/starfield.svg') center / cover no-repeat;
+    }
+
+    /* 3D WIREFRAME SVG OVERLAY LAYER */
+    .card-bg-wireframe {
+      position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background: center / 100% 100% no-repeat; mix-blend-mode: screen;
+    }
+
+    .card-well-chrome .card-bg-wireframe { background-image: url('assets/wireframe-3d-well-chrome.svg?v=1'); }
+    .card-wormhole-chrome .card-bg-wireframe { background-image: url('assets/wireframe-3d-wormhole-chrome.svg?v=1'); }
+    .card-geodesic-chrome .card-bg-wireframe { background-image: url('assets/wireframe-3d-geodesic-chrome.svg?v=1'); }
+    .card-vortex-chrome .card-bg-wireframe { background-image: url('assets/wireframe-3d-vortex-chrome.svg?v=1'); }
+
+    .card-well-white .card-bg-wireframe { background-image: url('assets/wireframe-3d-well-white.svg?v=1'); }
+
+    .wireframe-card__header {
+      position:relative; z-index:5; display:flex; justify-content:space-between; align-items:center;
+      padding: .75rem 1.4rem; background: rgba(0,0,0,0.75); border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-family: var(--controls); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .wireframe-card__tag { padding: .2rem .5rem; border-radius: 2px; font-weight: 700; background: rgba(226,232,240,0.15); color: #e2e8f0; border: 1px solid rgba(226,232,240,0.4); }
+
+    .wireframe-card__copy { position:relative; z-index:5; width:min(90%,44rem); padding:clamp(1.4rem,3vw,2.2rem); }
+    .wireframe-card__copy h2 { margin:0 0 1rem; color:#dce7eb; font-family:var(--display); font-size:clamp(2.2rem,6vw,4rem); font-weight:700; letter-spacing:-.04em; line-height:.85; text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 8px rgba(255,255,255,.6); }
+    .wireframe-card__copy p { max-width:38rem; margin:0; color:#fff; font:clamp(.9rem,1.6vw,1.08rem)/1.7 var(--reading); text-shadow: 0 1px 3px rgba(0,0,0,0.9); }
+    .wireframe-card__copy .nav-btn-container { margin-top: 1.5rem; }
+
+    @media (min-width:700px) { .wireframe-card__copy { padding:2.2rem; } }
+  </style>
+</head>
+<body>
+  <main class="wireframe-preview">
+    <header class="wireframe-header">
+      <h1>ABOUT ME<br>COMBINED STARS & WIREFRAME OPACITY SHOWCASE</h1>
+      <p>Use the live slider below to control the opacity of <strong>BOTH the cosmic space stars and 3D wireframe patterns together in real-time</strong>!</p>
+    </header>
+
+    <!-- INTERACTIVE CONTROLS PANEL WITH COMBINED OPACITY SLIDER -->
+    <div class="controls-panel" aria-label="Interactive Design Controls Panel">
+      
+      <!-- COMBINED STARS & WIREFRAME OPACITY SLIDER -->
+      <div class="control-group">
+        <span>Combined Stars & Wireframe Opacity:</span>
+        <div class="slider-container">
+          <input type="range" class="custom-slider" id="opacitySlider" min="2" max="60" value="15" step="1" oninput="setWireframeOpacity(this.value)">
+          <div class="slider-val-tag" id="opacityReadout">15% Opacity</div>
+        </div>
+      </div>
+
+      <!-- HOVER FILM GRAIN DENSITY -->
+      <div class="control-group">
+        <span>Hover Film Grain Density:</span>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap;">
+          <button class="grain-btn" onclick="setGrain(0.20, this)">Light Grain (20%)</button>
+          <button class="grain-btn active" onclick="setGrain(0.55, this)">Medium 90s OVA Grain (55%)</button>
+          <button class="grain-btn" onclick="setGrain(0.90, this)">Heavy Anime VHS Film Grain (90%)</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PROTECTED TEXT LIQUID CHROME BUTTON SHOWCASE SECTION -->
+    <section class="button-showcase" aria-label="Protected Text Liquid Chrome Button Showcase">
+      <div class="grain-layer"></div>
+      <h3>Liquid Silver Chrome Buttons (Protected Text Floating Above Liquid Light)</h3>
+      <div class="button-row">
+        <a class="custom-btn btn--ultra-bright-chrome" href="about-me.html">
+          <div class="btn-liquid-light-pool"></div>
+          <div class="btn-grain-layer"></div>
+          <div class="btn-shimmer-sweep"></div>
+          <span class="btn-text">Liquid Silver Chrome →</span>
+        </a>
+        <a class="custom-btn btn--platinum-pill" href="about-me.html">
+          <div class="btn-liquid-light-pool"></div>
+          <div class="btn-grain-layer"></div>
+          <div class="btn-shimmer-sweep"></div>
+          <span class="btn-text">Platinum Specular Pill →</span>
+        </a>
+        <a class="custom-btn btn--specular-wave" href="about-me.html">
+          <div class="btn-liquid-light-pool"></div>
+          <div class="btn-grain-layer"></div>
+          <div class="btn-shimmer-sweep"></div>
+          <span class="btn-text">Luminous Chrome Wave →</span>
+        </a>
+        <a class="custom-btn btn--mirror-glass" href="about-me.html">
+          <div class="btn-liquid-light-pool"></div>
+          <div class="btn-grain-layer"></div>
+          <div class="btn-shimmer-sweep"></div>
+          <span class="btn-text">Silver Mirror Glass →</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="filter-controls" aria-label="Filter variations">
+      <button class="filter-btn active" onclick="filterTheme('all', this)">All Variations</button>
+      <button class="filter-btn" onclick="filterTheme('well', this)">Shape 01 Gravity Well Only</button>
+      <button class="filter-btn" onclick="filterTheme('vortex', this)">Shape 04 Vortex Tunnel</button>
+    </div>
+
+    <section class="wireframe-grid" aria-label="3D Wireframe background options gallery">
+      
+      <!-- SHAPE 01 - LIQUID CHROME & SPACE STARS (BOTH STARS AND WIREFRAME SLIDER CONTROLLED) -->
+      <article class="wireframe-card wireframe-card--chrome card-well-chrome" data-theme="well">
+        <div class="card-bg-layer">
+          <div class="card-bg-stars"></div>
+          <div class="card-bg-wireframe"></div>
+        </div>
+        <div class="wireframe-card__header">
+          <span>Shape 01 • Spacetime Gravity Well (Liquid Chrome & Space Stars)</span>
+          <span class="wireframe-card__tag">Slider Controls Stars + Wireframe</span>
+        </div>
+        <div class="wireframe-card__copy">
+          <h2>ABOUT ME</h2>
+          <p>I am a student at City Tech majoring in emerging media technology, with a focus on computation and web development. I have balanced experience across various areas of game development and enjoy physical computing.</p>
+          <div class="nav-btn-container">
+            <a class="custom-btn btn--ultra-bright-chrome" href="about-me.html">
+              <div class="btn-liquid-light-pool"></div>
+              <div class="btn-grain-layer"></div>
+              <div class="btn-shimmer-sweep"></div>
+              <span class="btn-text">more →</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- SHAPE 04: 3D CURVED OPTICAL VORTEX TUNNEL (STARS + WIREFRAME SLIDER CONTROLLED) -->
+      <article class="wireframe-card wireframe-card--chrome card-vortex-chrome" data-theme="vortex">
+        <div class="card-bg-layer">
+          <div class="card-bg-stars"></div>
+          <div class="card-bg-wireframe"></div>
+        </div>
+        <div class="wireframe-card__header">
+          <span>Shape 04 • 3D Curved Optical Vortex Tunnel (Reference Image Match)</span>
+          <span class="wireframe-card__tag">Slider Controls Stars + Wireframe</span>
+        </div>
+        <div class="wireframe-card__copy">
+          <h2>ABOUT ME</h2>
+          <p>I am a student at City Tech majoring in emerging media technology, with a focus on computation and web development. I have balanced experience across various areas of game development and enjoy physical computing.</p>
+          <div class="nav-btn-container">
+            <a class="custom-btn btn--specular-wave" href="about-me.html">
+              <div class="btn-liquid-light-pool"></div>
+              <div class="btn-grain-layer"></div>
+              <div class="btn-shimmer-sweep"></div>
+              <span class="btn-text">more →</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- SHAPE 01 - NO STARS (CLEAN DEEP BLACK) -->
+      <article class="wireframe-card card-well-nostars" data-theme="well">
+        <div class="card-bg-layer">
+          <div class="card-bg-wireframe" style="background-image: url('assets/wireframe-3d-well-chrome.svg?v=1');"></div>
+        </div>
+        <div class="wireframe-card__header">
+          <span>Shape 01 • Spacetime Gravity Well (NO STARS • DEEP BLACK)</span>
+          <span class="wireframe-card__tag">Wireframe Only Slider</span>
+        </div>
+        <div class="wireframe-card__copy">
+          <h2>ABOUT ME</h2>
+          <p>I am a student at City Tech majoring in emerging media technology, with a focus on computation and web development. I have balanced experience across various areas of game development and enjoy physical computing.</p>
+          <div class="nav-btn-container">
+            <a class="custom-btn btn--platinum-pill" href="about-me.html">
+              <div class="btn-liquid-light-pool"></div>
+              <div class="btn-grain-layer"></div>
+              <div class="btn-shimmer-sweep"></div>
+              <span class="btn-text">more →</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <script>
+    function setWireframeOpacity(val) {
+      const decVal = (val / 100).toFixed(2);
+      document.documentElement.style.setProperty('--wireframe-opacity', decVal);
+      document.getElementById('opacityReadout').innerText = val + '% Opacity';
+    }
+
+    function setGrain(opacityVal, btn) {
+      document.querySelectorAll('.grain-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.documentElement.style.setProperty('--grain-opacity', opacityVal);
+    }
+
+    function filterTheme(theme, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.wireframe-card');
+      cards.forEach(card => {
+        if (theme === 'all' || card.getAttribute('data-theme') === theme) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

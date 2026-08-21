@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 842 594" preserveAspectRatio="none">
+  <defs>
+    <filter id="red-linework" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="0 0 0 0 .937  0 0 0 0 .188  0 0 0 0 .18  -.333 -.333 -.333 0 1"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0 0 .25 .92"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <image href="wireframe-well-reference.png" width="842" height="594" filter="url(#red-linework)"/>
+</svg>

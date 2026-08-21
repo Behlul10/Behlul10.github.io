@@ -6,8 +6,118 @@
   <meta name="description" content="Behlul Vardal — Emerging Media Technology student.">
   <title>Behlul Vardal Portfolio</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=28">
   <link rel="stylesheet" href="graphic.css">
+  <style>
+    /* ============================================================ */
+    /* WINNING DESIGN APPLIED TO THE "ABOUT ME" BOX CONTAINER       */
+    /* Shape 01 Spacetime Gravity Well (Liquid Chrome & Space Stars)*/
+    /* Opacity: 26% | Button: Liquid Silver Chrome with 55% Grain  */
+    /* ============================================================ */
+
+    .about.section .sub-container {
+      position: relative; overflow: hidden; isolation: isolate;
+      border: 1px solid #ffffff; background: #050505;
+      padding: 2rem; box-shadow: 0 0 24px rgba(0,0,0,0.8);
+    }
+
+    /* 26% OPACITY BACKGROUND LAYER INSIDE THE ABOUT ME BOX ONLY */
+    .about.section .sub-container::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      opacity: 0.26; /* EXACT 26% WINNING OPACITY */
+      background: #040404 url('assets/starfield.svg') center / cover no-repeat;
+    }
+
+    .about.section .sub-container::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      opacity: 0.26; /* EXACT 26% WINNING OPACITY WIREFRAME */
+      background: url('assets/wireframe-3d-well-chrome.svg?v=1') center / 100% 100% no-repeat;
+      mix-blend-mode: screen;
+    }
+
+    .about.section .sub-container > * {
+      position: relative; z-index: 5;
+    }
+
+    /* LIQUID SILVER CHROME BUTTON INSIDE ABOUT ME BOX */
+    .custom-btn {
+      position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center;
+      padding: .9rem 2.2rem; font-family: var(--controls); font-size: .86rem; font-weight: 800;
+      letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border-radius: 3px;
+      cursor: pointer; transition: all .3s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden;
+      border: 1.5px solid #ffffff;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(241, 245, 249, 0.95) 25%, rgba(203, 213, 225, 0.9) 50%, rgba(226, 232, 240, 0.95) 75%, rgba(255, 255, 255, 1) 100%),
+        url('assets/liquid-chrome-texture.svg?v=110') center / cover no-repeat;
+      box-shadow:
+        inset 0 1.5px 3px rgba(255,255,255,1),
+        inset 0 -3px 6px rgba(148, 163, 184, 0.45),
+        0 0 16px rgba(255, 255, 255, 0.65),
+        0 0 32px rgba(226, 232, 240, 0.4);
+    }
+
+    .custom-btn::after {
+      content: '✦'; position: absolute; top: -7px; right: -7px; color: #ffffff; font-size: 16px; z-index: 6;
+      text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff; transition: transform .3s ease;
+    }
+
+    .btn-text {
+      position: relative; z-index: 10; isolation: isolate; mix-blend-mode: normal;
+      color: #030712; font-weight: 900; letter-spacing: .14em;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.95);
+      transition: color .25s ease;
+    }
+
+    .btn-liquid-light-pool {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.7) 35%, transparent 75%),
+        radial-gradient(ellipse at 75% 80%, rgba(226, 232, 240, 0.9) 0%, rgba(148, 163, 184, 0.5) 45%, transparent 80%);
+      opacity: 0; transition: opacity .35s ease, transform .35s ease;
+      animation: gentleLiquidRipples 3.5s infinite alternate ease-in-out;
+    }
+
+    .btn-grain-layer {
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background-image: url('assets/anime-grain-texture.png?v=110'); background-size: 180px 180px;
+      mix-blend-mode: overlay; opacity: 0; transition: opacity .35s ease;
+    }
+
+    .btn-shimmer-sweep {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      background: linear-gradient(115deg, transparent 25%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.3) 55%, transparent 75%);
+      transform: translateX(-160%); transition: none;
+    }
+
+    .custom-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow:
+        inset 0 2.5px 5px rgba(255,255,255,1),
+        0 0 40px rgba(255, 255, 255, 1),
+        0 0 75px rgba(56, 189, 248, 0.9);
+    }
+
+    .custom-btn:hover .btn-liquid-light-pool { opacity: 1; transform: scale(1.1); }
+    .custom-btn:hover .btn-grain-layer { opacity: 0.55; }
+    .custom-btn:hover .btn-shimmer-sweep { animation: continuousLiquidSweep 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+    .custom-btn:hover::after { animation: pulseSparkleSpin 1.6s infinite alternate ease-in-out; }
+
+    @keyframes gentleLiquidRipples {
+      0% { transform: scale(1) translate(0, 0); }
+      100% { transform: scale(1.08) translate(3px, -2px); }
+    }
+
+    @keyframes continuousLiquidSweep {
+      0% { transform: translateX(-160%); }
+      55% { transform: translateX(160%); }
+      100% { transform: translateX(160%); }
+    }
+
+    @keyframes pulseSparkleSpin {
+      0% { opacity: 0.7; transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 8px #ffffff); }
+      100% { opacity: 1; transform: scale(1.35) rotate(35deg); filter: drop-shadow(0 0 14px #ffffff) drop-shadow(0 0 28px #38bdf8); }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -113,21 +223,53 @@
       </div>
     </section>
 
+    <!-- ABOUT ME BOX CONTAINER WITH SHAPE 01 GRAVITY WELL + CHROME STARS AT 26% OPACITY -->
     <section class="section about">
       <div class="sub-container">
         <p class="section-label">ABOUT ME</p>
         <p>I am a student at City Tech majoring in emerging media technology, with a focus on computation and web development. I have balanced experience across various areas of game development and enjoy physical computing.</p>
-        <a href="about-me.html" class="nav-btn">more →</a>
+        <div style="margin-top: 1.2rem;">
+          <a href="about-me.html" class="custom-btn">
+            <div class="btn-liquid-light-pool"></div>
+            <div class="btn-grain-layer"></div>
+            <div class="btn-shimmer-sweep"></div>
+            <span class="btn-text">more →</span>
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="section skills">
-      <h2>SKILLS</h2>
-      <div class="skill-group"><h3>Languages</h3><div class="skill-tags"><span>TypeScript</span><span>JavaScript</span><span>Python</span><span>C#</span><span>C/C++</span><span>Java</span><span>HTML</span><span>CSS</span><span>GDScript</span></div></div>
-      <div class="skill-group"><h3>Backend &amp; Data</h3><div class="skill-tags"><span>Node.js</span><span>NestJS</span><span>BullMQ</span><span>PostgreSQL</span><span>Redis</span><span>REST APIs</span><span>WebSockets</span></div></div>
-      <div class="skill-group"><h3>Infrastructure &amp; Tools</h3><div class="skill-tags"><span>Docker</span><span>Git</span><span>GitHub</span><span>GitHub Actions</span><span>Google Workspace APIs</span><span>Google Cloud Platform</span></div></div>
-      <div class="skill-group"><h3>Frameworks &amp; Libraries</h3><div class="skill-tags"><span>Unity</span><span>Godot</span><span>Phaser</span><span>p5.js</span><span>MediaPipe</span><span>Three.js</span><span>Qiskit</span><span>WordPress</span></div></div>
-      <div class="skill-group"><h3>Creative &amp; Physical</h3><div class="skill-tags"><span>Fusion 360</span><span>KiCad</span><span>Photoshop</span><span>Illustrator</span><span>After Effects</span><span>Audition</span><span>Premiere Pro</span><span>Max</span></div></div>
+    <section class="section featured-projects" aria-labelledby="featured-projects-title">
+      <div class="featured-projects__heading">
+        <h2 id="featured-projects-title">FEATURED<br>PROJECTS</h2>
+      </div>
+      <div class="featured-projects__grid">
+        <a class="featured-project featured-project--vision" href="https://github.com/Behlul10/vision-mapper" target="_blank" rel="noreferrer">
+          <div class="featured-project__scene" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="featured-project__copy">
+            <p class="featured-project__number">01 / REAL-TIME WEB</p>
+            <h3>VISION<br>MAPPER</h3>
+            <p>Webcam motion capture into 3D skeletal animation.</p>
+          </div>
+        </a>
+        <a class="featured-project featured-project--quant" href="https://github.com/Behlul10/quant-motion" target="_blank" rel="noreferrer">
+          <div class="featured-project__scene" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="featured-project__copy">
+            <p class="featured-project__number">02 / HYBRID RESEARCH</p>
+            <h3>QUANT<br>MOTION</h3>
+            <p>Quantum-classical hand-landmark prediction research.</p>
+          </div>
+        </a>
+        <a class="featured-project featured-project--rainy" href="https://github.com/Behlul10/RainyCloud" target="_blank" rel="noreferrer">
+          <div class="featured-project__scene" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="featured-project__copy">
+            <p class="featured-project__number">03 / PHYSICAL SYSTEM</p>
+            <h3>RAINY CLOUD</h3>
+            <p>Environmental sensing for a cloud-seeding chamber prototype.</p>
+          </div>
+        </a>
+      </div>
+      <a class="nav-btn featured-projects__more" href="projects.html">View all projects →</a>
     </section>
 
     <section id="contact" class="section contact-section">
@@ -139,7 +281,9 @@
       </div>
     </section>
   </main>
+
   <footer class="bottom-nav"><a href="index.html">Home</a><a href="about-me.html">About</a><a href="projects.html">Projects</a></footer>
+  
   <script>
     const introDuration = 460;
     document.body.classList.add('intro-active');
@@ -201,7 +345,7 @@
       chromeRect(-half, -half, size, size);
       chromeRect(-half + depth, -half - depth, size, size);
       line(-half, -half, -half + depth, -half - depth);
-      line(half, -half, half + depth, -half - depth);
+      line(half, -half, half + depth, half - depth);
       line(half, half, half + depth, half - depth);
       line(-half, half, -half + depth, half - depth);
       context.restore();
