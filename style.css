@@ -213,3 +213,16 @@ h2 { margin:.1rem 0 1.4rem; font-family:var(--supporting); font-size:clamp(2rem,
   text-shadow:0 0 1px rgba(244,249,252,.85),0 0 5px rgba(220,235,243,.72),0 0 13px rgba(174,202,218,.54),1px 0 1px rgba(156,216,238,.55),-1px 0 1px rgba(193,177,192,.35);
   box-shadow:0 0 0 1px rgba(222,237,244,.76),0 0 8px rgba(212,231,240,.56),0 0 22px rgba(167,197,213,.45),0 0 44px rgba(125,156,180,.24),inset 0 0 16px rgba(231,243,248,.44);
 }
+
+/* Freeze decorative effects when their page or section is not visible. */
+.motion-paused, .motion-paused::before, .motion-paused::after,
+.motion-paused *, .motion-paused *::before, .motion-paused *::after {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
