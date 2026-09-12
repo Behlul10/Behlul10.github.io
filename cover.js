@@ -249,7 +249,7 @@ const drawCover = (time = 0) => {
 
 // Only schedule work while the graphic is on screen in an active page.
 const canDraw = () => pageActive && coverVisible && !document.hidden && width > 0 && height > 0;
-const canAnimate = () => canDraw() && !reducedMotion.matches;
+const canAnimate = () => canDraw();
 
 const stopCover = () => {
   cancelAnimationFrame(animationFrame);
@@ -276,8 +276,7 @@ const animateCover = (time) => {
 const updateCoverMotion = () => {
   stopCover();
   if (!canDraw()) return;
-  if (reducedMotion.matches) drawCover(elapsedTime);
-  else animationFrame = requestAnimationFrame(animateCover);
+  animationFrame = requestAnimationFrame(animateCover);
 };
 
 // Content dimensions ignore the startup CSS zoom. Resize only when layout changes.
@@ -293,7 +292,7 @@ new ResizeObserver(([entry]) => {
 }).observe(canvas);
 
 new IntersectionObserver(([entry]) => {
-  coverVisible = entry.isIntersecting && entry.intersectionRatio > 0;
+  coverVisible = entry.isIntersecting;
   updateCoverMotion();
 }, { threshold: 0 }).observe(coverElement);
 
@@ -303,7 +302,6 @@ document.addEventListener('visibilitychange', () => {
 });
 reducedMotion.addEventListener('change', () => {
   if (reducedMotion.matches) finishIntro();
-  updateCoverMotion();
 });
 window.addEventListener('pagehide', () => {
   pageActive = false;

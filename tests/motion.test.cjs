@@ -91,21 +91,21 @@ test('offscreen/hidden pages have no animation work and resume without a time ju
   assert.equal(h.pending(), 0);
 });
 
-test('reduced motion renders a still scene and responds to preference changes', () => {
+test('visible scene keeps animating with reduced motion enabled; only the startup zoom is skipped', () => {
   const h = setup({ reduced: true });
   assert.equal(h.document.body.classList.contains('intro-active'), false);
-  h.resize(); h.visible(true);
-  assert.equal(h.draws(), 1);
-  assert.equal(h.pending(), 0);
-  h.resize(390, 405);
+  h.resize(); h.visible(true); h.frame(0); h.timer(); h.frame(50);
   assert.equal(h.draws(), 2);
-  assert.equal(h.pending(), 0);
-  h.preference.matches = false; h.preference.emit('change'); h.frame(100);
-  assert.equal(h.draws(), 3);
+  assert.equal(h.pending(), 1);
+  h.preference.matches = false; h.preference.emit('change');
   h.preference.matches = true; h.preference.emit('change');
+  h.timer(); h.frame(100);
+  assert.equal(h.draws(), 3);
+  h.visible(false); assert.equal(h.pending(), 0);
+  h.visible(true); h.frame(150); assert.equal(h.draws(), 4);
+  h.hide(true); h.resize(390, 405);
   assert.equal(h.pending(), 0);
-  h.hide(true); h.resize(290, 331);
-  assert.equal(h.draws(), 4, 'hidden reduced-motion scenes are not redrawn');
+  assert.equal(h.draws(), 4);
 });
 
 test('canvas dimensions are stable during animation and only change with layout', () => {
@@ -129,7 +129,8 @@ test('page navigation and initial hidden load cannot leave running animation loo
   h.window.emit('pagehide'); assert.equal(h.pending(), 0);
   h.resize(390, 405); h.visible(true); assert.equal(h.pending(), 0);
   h.window.emit('pageshow'); h.frame(10000); assert.equal(h.draws(), 2);
-  h.visible(true, 0); assert.equal(h.pending(), 0, 'touching the viewport edge is not visible');
+  h.visible(false); assert.equal(h.pending(), 0);
+  h.visible(true, 0); assert.equal(h.pending(), 1, 'edge contact must resume: threshold zero may not fire again when the ratio grows');
 });
 
 test('CSS effects pause by page and viewport, and HTML has no legacy animated SVGs', () => {
@@ -142,10 +143,12 @@ test('CSS effects pause by page and viewport, and HTML has no legacy animated SV
   h.hide(false); assert(!h.document.documentElement.classList.contains('motion-paused'));
   h.intersections[1]([{ target: h.group, isIntersecting: false, intersectionRatio: 0 }]);
   assert(h.group.classList.contains('motion-paused'));
+  h.intersections[1]([{ target: h.group, isIntersecting: true, intersectionRatio: 0 }]);
+  assert(!h.group.classList.contains('motion-paused'), 'edge contact must unpause CSS effects');
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   assert(!html.includes('<animate'));
-  assert(html.includes('cover.js?v=1'));
+  assert(html.includes('cover.js?v=2'));
   const css = fs.readFileSync(path.join(root, 'style.css'), 'utf8');
   assert(css.includes('animation-play-state: paused !important'));
-  assert(css.includes('@media (prefers-reduced-motion: reduce)'));
+  assert(!css.includes('animation: none !important'), 'do not globally disable visible effects');
 });

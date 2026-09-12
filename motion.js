@@ -8,7 +8,7 @@ updatePageMotion();
 
 const motionObserver = new IntersectionObserver((entries) => {
   for (const entry of entries) {
-    entry.target.classList.toggle('motion-paused', !entry.isIntersecting || entry.intersectionRatio === 0);
+    entry.target.classList.toggle('motion-paused', !entry.isIntersecting);
   }
 }, { threshold: 0 });
 document.querySelectorAll('.hero-section, .custom-btn, .contact a, .featured-projects__more').forEach((element) => {
