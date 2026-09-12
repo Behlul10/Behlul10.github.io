@@ -350,10 +350,12 @@
       context.save();
       context.translate(x, y);
       context.rotate(angle);
+      // Rotate around the center of both faces, not just the front face.
+      context.translate(-depth / 2, depth / 2);
       chromeRect(-half, -half, size, size);
       chromeRect(-half + depth, -half - depth, size, size);
       line(-half, -half, -half + depth, -half - depth);
-      line(half, -half, half + depth, half - depth);
+      line(half, -half, half + depth, -half - depth);
       line(half, half, half + depth, half - depth);
       line(-half, half, -half + depth, half - depth);
       context.restore();
@@ -508,11 +510,17 @@
       const cubeScale = 1 + wander(time, 2.7, 11500) * .07;
       const cylinderScale = 1 + wander(time, 5.1, 13000) * .06;
       const orbScale = 1 + wander(time, 8.4, 12000) * .07;
+      const cubeSide = cubeSize * 1.08 * cubeScale;
+      const cubeDepth = cubeSize * .39 * cubeScale;
+      // Keep every corner inside the window at every rotation, including the stroke.
+      const cubeMargin = Math.hypot((cubeSide + cubeDepth) / 2, (cubeSide + cubeDepth) / 2) + 2;
+      const cubeX = farX + farWidth * (.18 + wander(time, 1.2, 9200) * .065);
+      const cubeY = farY + farHeight * (.35 + wander(time, 3.9, 10500) * .08);
       drawVoxel(
-        farX + farWidth * (.18 + wander(time, 1.2, 9200) * .065),
-        farY + farHeight * (.35 + wander(time, 3.9, 10500) * .08),
-        cubeSize * 1.08 * cubeScale,
-        cubeSize * .39 * cubeScale,
+        Math.max(farX + cubeMargin, Math.min(farX + farWidth - cubeMargin, cubeX)),
+        Math.max(farY + cubeMargin, Math.min(farBottom - cubeMargin, cubeY)),
+        cubeSide,
+        cubeDepth,
         time / 14500 + wander(time, 14.2, 18000) * .15
       );
       drawWireCylinder(
